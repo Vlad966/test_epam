@@ -112,7 +112,7 @@ AnsiString Skobki(AnsiString *s)
     int fig = 0;  // фигурная
 
     char *ch = s->c_str();
-    while (ch == 0)
+    while (*ch != '\0')
     {
         if (*ch == '(') krug++;
         if (*ch == '[') kvad++;
@@ -122,9 +122,7 @@ AnsiString Skobki(AnsiString *s)
         if (*ch == '}') fig--;
         ch++;
     }
-
-    return (krug == 0?"закрыта ":"незакрыта");
-    //"Скобки: ( - " + (krug == 0?"закрыта ":"незакрыта") + " [ - " + (kvad == 0?"закрыта ":"незакрыта") + " { - " + (fig == 0?"закрыта ":"незакрыта");
+    return  "Скобки: ( - " + AnsiString(krug == 0?"закрыта ":"незакрыта") + " [ - " + AnsiString(kvad == 0?"закрыта ":"незакрыта") + " { - " + AnsiString(fig == 0?"закрыта ":"незакрыта");
 }
 
 
@@ -178,4 +176,11 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::Button5Click(TObject *Sender)
+{
+    AnsiString s = Edit1->Text;
+//    char* m = s.c_str();
+    Memo1->Lines->Add(Skobki(&s));
+}
+//---------------------------------------------------------------------------
 
